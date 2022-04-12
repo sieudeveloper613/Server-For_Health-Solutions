@@ -1,16 +1,16 @@
 <?php
 
-require "connect.php";
+require "connect.php";~
 
 $response = array();
 
-if( isset($_GET["address"]) && isset($_GET["isDefault"]) && isset($_GET["id"])){
-    $address = $_GET["address"];
-    $isDefault = $_GET["isDefault"];
+if( isset($_GET["_address"]) && isset($_GET["_isDefault"]) && isset($_GET["id"])){
+    $address = $_GET["_address"];
+    $isDefault = $_GET["_isDefault"];
     $id = $_GET["id"];
     
         if($conn){
-            $sql = "INSERT INTO address (id, address, isDefault) 
+            $sql = "INSERT INTO address (id, _address, _isDefault) 
                 VALUE ((select id from customer where id = $id),'$address', $isDefault)";
              
             $result = mysqli_query($conn, $sql);
