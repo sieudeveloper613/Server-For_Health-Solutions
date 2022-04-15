@@ -10,38 +10,38 @@
 
     if (mysqli_num_rows($result) > 0) {
        
-            $response["product"] = array();
+            $response["productList"] = array();
             // output data of each row
         while($row = mysqli_fetch_assoc($result)) {
             $product = array();
-            $product['Ids'] = $row['Ids'];
-            $product['categoryId'] = $row['categoryId'];
-            $product['name'] = $row['name'];
-            $product['price'] = $row['price'];
-            $product['categoryName'] = $row['categoryName'];
-            $product['typeProduct'] = $row['typeProduct'];
-            $product['whereProduct'] = $row['whereProduct'];
-            $product['branchProduct'] = $row['branchProduct'];
-            $product['image'] = $row['image'];
+            $product['_idProduct'] = $row['_idProduct'];
+            $product['_idCategory'] = $row['_idCategory'];
+            $product['_nameProduct'] = $row['_nameProduct'];
+            $product['_priceProduct'] = $row['_priceProduct'];
+            $product['_nameCategory'] = $row['_nameCategory'];
+            $product['_typeProduct'] = $row['_typeProduct'];
+            $product['_originProduct'] = $row['_originProduct'];
+            $product['_branchProduct'] = $row['_branchProduct'];
+            $product['_imageProduct'] = $row['_imageProduct'];
             
             //$response["product"] = $product;
-            array_push($response['product'], $product);
+            array_push($response['productList'], $product);
         }
-        $status = "success";
+        $status = "SUCCESS";
         $result = 1;
         $response["status"] = $status;
         $response["result"] = $result;
         echo json_encode($response);
 
     } else {
-        $status = "failed";
+        $status = "FAILED";
         $result = 0;
         $response["status"] = $status;
         $response["result"] = $result;
         echo json_encode($response);
         }
     }else{
-        $status = "failed";
+        $status = "FAILED";
         echo json_encode(array('status' => $status), JSON_FORCE_OBJECT);
     }
 

@@ -6,39 +6,47 @@
 
     $response = array();
 
-    if(isset($_GET['categoryId']) && isset($_GET["name"]) && isset($_GET["price"]) 
-        && isset($_GET["categoryName"]) && isset($_GET["typeProduct"]) && isset($_GET["whereProduct"])
-        && isset($_GET["branchProduct"])&& isset($_GET["image"]))
-    {
-        $Ids = $_GET["Ids"];
-        $categoryId = $_GET["categoryId"];
-        $name = $_GET["name"];
-        $price = $_GET["price"];
-        $categoryName = $_GET["categoryName"];
-        $typeProduct = $_GET["typeProduct"];
-        $whereProduct = $_GET["whereProduct"];
-        $branchProduct = $_GET["branchProduct"];
-        $image = $_GET["image"];
+    if(isset($_GET["_idProduct"]) isset($_GET['_idCategory']) && isset($_GET["_nameProduct"]) && isset($_GET["_priceProduct"])
+        && isset($_GET["_nameCategory"]) 
+        && isset($_GET["_typeProduct"]) && isset($_GET["_originProduct"])
+        && isset($_GET["_branchProduct"])&& isset($_GET["_imageProduct"]))
+    {   
+        $idProduct = $_GET["_idProduct"];
+        $idCategory = $_GET["_idCategory"];
+        $nameProduct = $_GET["_nameProduct"];
+        $priceProduct = $_GET["_priceProduct"];
+        $nameCategory = $_GET["_nameCategory"];
+        $typeProduct = $_GET["_typeProduct"];
+        $originProduct = $_GET["_originProduct"];
+        $branchProduct = $_GET["_branchProduct"];
+        $imageProduct = $_GET["_imageProduct"];
 
-        $sql = "UPDATE product SET categoryId = '$categoryId', name = '$name',
-        price = '$price', categoryName = '$categoryName', typeProduct = '$typeProduct',
-        whereProduct = '$whereProduct', branchProduct = '$branchProduct', image = '$image'
-                            WHERE Ids = '$Ids'";
+        $sql = " UPDATE product SET categoryId = (SELECT _idCategory FROM Category WHERE _idCategory = $idCategory), 
+        _nameProduct = '$nameProduct', _priceProduct = $priceProduct, _nameCategory = '$nameCategory', _typeProduct = '$typeProduct',
+        _originProduct = '$originProduct', _branchProduct = '$branchProduct', _imageProduct = '$imageProduct'
+                            WHERE _idProduct = '$idProduct' ";
 
 
-        $result = $db->conn->query($sql);
+        $result = mysqli_query($conn, $sql);
 
-        if ($result === TRUE) {
-            $response['result'] = "true";
-        } else {
-            $response['result'] = "false";
-            $response['message'] = " Update lỗi";
-        }      
+        if($result){
+            $status = "SUCCESS";
+            $result = 1;
+            $response['status'] = $status;
+            $response['result'] = $result;
+            echo json_encode($response);
+        }else{
+            $status = "FAILED";
+            $result = 0;
+            $response['status'] = $status;
+            $response['result'] = $result;
+            echo json_encode($response);
+        }
     }else{
         $response['result'] = "false";
         $response['message'] = " Thiếu dữ liệu";
     }
 
     
-    echo json_encode($response);
+    mysqli_close($conn);
 ?>

@@ -4,15 +4,18 @@ require "connect.php";
 
 $response = array();
 
-if(isset($_GET["_phone"]) && isset($_GET["_id"])){
-    $phone = $_GET["_phone"];
+if(isset($_GET["_idAddress"]) && isset($_GET["_id"])){
     $id = $_GET["_id"];
-    
-        if($conn){
-            $sql = "UPDATE customer SET _phone = '$phone' where _id = $id";
-            $result = mysqli_query($conn, $sql);
+    $idAddress = $_GET["_idAddress"];
+   
+            $query = "DELETE FROM address WHERE _id = (SELECT _id FROM Customer WHERE _id = $id) AND 
+                                                address._idAddress = $idAddress";
 
-            if($result && strlen($phone) == 10){
+            // $sql = "DELETE FROM address WHERE address._idAddress = $idAddress";
+             
+            $result = mysqli_query($conn, $query);
+
+            if($result){
                 $status = "SUCCESS";
                 $result = 1;
                 $response["status"] = $status;
@@ -25,16 +28,12 @@ if(isset($_GET["_phone"]) && isset($_GET["_id"])){
                 $response["status"] = $status;
                 $response["result"] = $result;
                 echo json_encode($response);
-                //echo json_encode(array('email' => $email, 'status' => $status, 'result' => $result));
-    
             }
     
-        }else{
-            $status = "FAILED";
-            echo json_encode(array('status' => $status), JSON_FORCE_OBJECT);
-        }
+        
+
 }else{
-    echo "????";
+    echo "none";
 }
 
     mysqli_close($conn);

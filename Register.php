@@ -2,39 +2,39 @@
 
 require "connect.php";
 
-if(isset($_GET["name"]) && isset($_GET["account"]) && isset($_GET["phone"]) && isset($_GET["password"])){
-    $name = $_GET["name"];
-    $account = $_GET["account"];
-    $phone = $_GET["phone"];
-    $password = $_GET["password"];
+if(isset($_GET["_name"]) && isset($_GET["_account"]) && isset($_GET["_phone"]) && isset($_GET["_password"])){
+    $name = $_GET["_name"];
+    $account = $_GET["_account"];
+    $phone = $_GET["_phone"];
+    $password = $_GET["_password"];
     
         if($conn){
-            $sql = "select * from customer where account = '$account' ";
+            $sql = "SELECT * FROM customer WHERE _account = '$account' ";
             $result = mysqli_query($conn, $sql);
     
             if(mysqli_num_rows($result) > 0){
-                $status = "exist";
+                $status = "EXIST";
                 $result = 0;
                 echo json_encode(array('status' => $status, 'result' => $result));
     
             }else{
-                $sql = "insert into customer (name, account, password, phone) 
+                $sql = "INSERT INTO customer (_name, _account, _password, _phone) 
                                     values ('$name', '$account', '$password', '$phone')";
                     if(mysqli_query($conn, $sql)){
-                        $status = "success";
+                        $status = "SUCCESS";
                         $result = 1;
                         
                         echo json_encode(array('status' => $status, 'result' =>$result));
     
                     }else{
-                        $status = "failed";
+                        $status = "FAILED";
                         echo json_encode(array('status' => $status), JSON_FORCE_OBJECT);
                     }
             }
     
     
         }else{
-            $status = "failed";
+            $status = "FAILED";
             echo json_encode(array('status' => $status), JSON_FORCE_OBJECT);
         }
 }

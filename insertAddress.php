@@ -1,22 +1,22 @@
 <?php
 
-require "connect.php";~
+require "connect.php";
 
 $response = array();
 
-if( isset($_GET["_address"]) && isset($_GET["_isDefault"]) && isset($_GET["id"])){
-    $address = $_GET["_address"];
+if( isset($_GET["_contentAddress"]) && isset($_GET["_isDefault"]) && isset($_GET["_id"])){
+    $contentAddress = $_GET["_contentAddress"];
     $isDefault = $_GET["_isDefault"];
-    $id = $_GET["id"];
+    $id = $_GET["_id"];
     
         if($conn){
-            $sql = "INSERT INTO address (id, _address, _isDefault) 
-                VALUE ((select id from customer where id = $id),'$address', $isDefault)";
+            $sql = "INSERT INTO address (_id, _contentAddress, _isDefault) 
+                VALUES ((SELECT _id FROM Customer WHERE _id = $id),'$contentAddress', $isDefault)";
              
             $result = mysqli_query($conn, $sql);
 
             if($result){
-                $status = "success";
+                $status = "SUCCESS";
                 $result = 1;
                 $response["idCustomer"] = $id;
                 $response["status"] = $status;
@@ -24,7 +24,7 @@ if( isset($_GET["_address"]) && isset($_GET["_isDefault"]) && isset($_GET["id"])
                 echo json_encode($response);
 
             }else{
-                $status = "failed";
+                $status = "FAILED";
                 $result = 0;
                 $response["status"] = $status;
                 $response["result"] = $result;
@@ -34,7 +34,7 @@ if( isset($_GET["_address"]) && isset($_GET["_isDefault"]) && isset($_GET["id"])
             }
     
         }else{
-            $status = "failed";
+            $status = "FAILED";
             echo json_encode(array('status' => $status), JSON_FORCE_OBJECT);
         }
 }else{

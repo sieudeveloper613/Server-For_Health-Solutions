@@ -3,50 +3,42 @@
 require "connect.php";
 
 $response = array();
-if(isset($_GET["account"]) && isset($_GET["password"])){
-    $account = $_GET["account"];
-    $password = $_GET["password"];
+if(isset($_GET["_account"]) && isset($_GET["_password"])){
+    $account = $_GET["_account"];
+    $password = $_GET["_password"];
     
     
         if($conn){
-            $sql = "select * from customer where account = '$account' and password = '$password' ";
+            $sql = "select * from customer where _account = '$account' and _password = '$password' ";
             $result = mysqli_query($conn, $sql);
     
             if(mysqli_num_rows($result) > 0){
                 $row = mysqli_fetch_assoc($result);
-                $status = "success";
+
+                $status = "SUCCESS";
                 $result = 1;
+
                 $customer = array();
-                $customer["id"] = $row["id"];
-                $customer["name"] = $row["name"];
-                $customer["account"] = $row["account"];
-                $customer["password"] = $row["password"];
-                $customer["phone"] = $row["phone"];
-                $customer["dob"] = $row["dob"];
-                $customer["email"] = $row["email"];
-                $customer["gender"] = $row["gender"];
-                $customer["avatar"] = $row["avatar"];
+                $customer["_id"] = $row["_id"];
+                $customer["_name"] = $row["_name"];
+                $customer["_account"] = $row["_account"];
+                $customer["_password"] = $row["_password"];
+                $customer["_phone"] = $row["_phone"];
+                $customer["_dob"] = $row["_dob"];
+                $customer["_email"] = $row["_email"];
+                $customer["_gender"] = $row["_gender"];
+                $customer["_avatar"] = $row["_avatar"];
             
-                // $name_user = $row['name'];
-                // $email_user = $row['email'];
-                // $phone_user = $row['phone'];
-                // $pass_user = $row['password'];
+                
 
                 $response["customer"] = $customer;
                 $response["status"] = $status;
                 $response["result"] = $result;
 
                 echo json_encode($response);
-
-                // echo json_encode(array('name' => $name_user,
-                //                        'email' => $email_user,
-                //                        'phone' => $phone_user,
-                //                        'password' => $pass_user, 
-                //                        'status' => $status, 
-                //                        'result' => $result));
     
             }else{
-                $status = "failed";
+                $status = "FAILED";
                 $result = 0;
                 $response["status"] = $status;
                 $response["result"] = $result;
@@ -56,7 +48,7 @@ if(isset($_GET["account"]) && isset($_GET["password"])){
             }
     
         }else{
-            $status = "failed";
+            $status = "FAILED";
             echo json_encode(array('status' => $status), JSON_FORCE_OBJECT);
         }
 }else{

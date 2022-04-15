@@ -4,35 +4,38 @@
 
     $response = array();
 
-    if(isset($_GET['categoryId']) && isset($_GET["name"]) && isset($_GET["price"]) 
-        && isset($_GET["categoryName"]) && isset($_GET["typeProduct"]) && isset($_GET["whereProduct"])
-        && isset($_GET["branchProduct"])&& isset($_GET["image"]))
+    if(isset($_GET['_idCategory']) && isset($_GET["_nameProduct"]) && isset($_GET["_priceProduct"])
+        && isset($_GET["_nameCategory"]) 
+        && isset($_GET["_typeProduct"]) && isset($_GET["_originProduct"])
+        && isset($_GET["_branchProduct"])&& isset($_GET["_imageProduct"]))
     {
         
-        $categoryId = $_GET["categoryId"];
-        $name = $_GET["name"];
-        $price = $_GET["price"];
-        $categoryName = $_GET["categoryName"];
-        $typeProduct = $_GET["typeProduct"];
-        $whereProduct = $_GET["whereProduct"];
-        $branchProduct = $_GET["branchProduct"];
-        $image = $_GET["image"];
+        $idCategory = $_GET["_idCategory"];
+        $nameProduct = $_GET["_nameProduct"];
+        $priceProduct = $_GET["_priceProduct"];
+        $nameCategory = $_GET["_nameCategory"];
+        $typeProduct = $_GET["_typeProduct"];
+        $originProduct = $_GET["_originProduct"];
+        $branchProduct = $_GET["_branchProduct"];
+        $imageProduct = $_GET["_imageProduct"];
     
-        $sql = "INSERT INTO product (categoryId, name, price, categoryName, typeProduct, whereProduct
-        , branchProduct, image) 
-                    VALUES ( '$categoryId', '$name', '$price', '$categoryName', '$typeProduct', $whereProduct
-                    ,'$branchProduct', '$image')"; 
+        $sql = "INSERT INTO Product (_idCategory, _nameProduct, _priceProduct, _typeProduct, 
+                                     _originProduct, _branchProduct, _imageProduct) 
+                    VALUES ((SELECT _idCategory FROM Category WHERE _idCategory = $idCategory),
+                            '$nameProduct', $priceProduct,(SELECT _nameCategory FROM Category WHERE _idCategory = $idCategory),
+                            '$typeProduct', '$originProduct',
+                            '$branchProduct', '$imageProduct')"; 
 
         $result = mysqli_query($conn, $sql);
 
         if($result){
-            $status = "success";
+            $status = "SUCCESS";
             $result = 1;
             $response['status'] = $status;
             $response['result'] = $result;
             echo json_encode($response);
         }else{
-            $status = "failed";
+            $status = "FAILED";
             $result = 0;
             $response['status'] = $status;
             $response['result'] = $result;
@@ -40,7 +43,7 @@
         }
 
     }else{
-        $response['result'] = "false";
+        $response['result'] = "FAILED";
         $response['message'] = "Less Info";
     }
 

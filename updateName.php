@@ -4,23 +4,23 @@ require "connect.php";
 
 $response = array();
 
-if(isset($_GET["name"]) && isset($_GET["id"])){
-    $name = $_GET["name"];
-    $id = $_GET["id"];
+if(isset($_GET["_name"]) && isset($_GET["_id"])){
+    $name = $_GET["_name"];
+    $id = $_GET["_id"];
     
         if($conn){
-            $sql = "UPDATE customer SET name = '$name' where id = $id";
+            $sql = "UPDATE customer SET _name = '$name' where _id = $id";
             $result = mysqli_query($conn, $sql);
 
             if($result){
-                $status = "success";
+                $status = "SUCCESS";
                 $result = 1;
                 $response["status"] = $status;
                 $response["result"] = $result;
                 echo json_encode($response);
 
             }else{
-                $status = "failed";
+                $status = "FAILED";
                 $result = 0;
                 $response["status"] = $status;
                 $response["result"] = $result;
@@ -30,7 +30,7 @@ if(isset($_GET["name"]) && isset($_GET["id"])){
             }
     
         }else{
-            $status = "failed";
+            $status = "FAILED";
             echo json_encode(array('status' => $status), JSON_FORCE_OBJECT);
         }
 }else{

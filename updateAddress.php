@@ -8,16 +8,16 @@ if( isset($_GET["_address"]) && isset($_GET["_isDefault"]) && isset($_GET["id"])
     $address = $_GET["_address"];
     $isDefault = $_GET["_isDefault"];
     $idAddress = $_GET["_idAddress"];
-    $id = $_GET["id"];
+    $id = $_GET["_id"];
     
         if($conn){
-            $sql = "UPDATE address set _address = '$address', _isDefault = $isDefault 
-            where id = $id and _idAddress = $idAddress"; 
+            $sql = "UPDATE address SET _address = '$address', _isDefault = $isDefault 
+            where _id = $id and _idAddress = $idAddress"; 
              
             $result = mysqli_query($conn, $sql);
 
             if($result){
-                $status = "success";
+                $status = "SUCCESS";
                 $result = 1;
                 $response["idCustomer"] = $id;
                 $response["status"] = $status;
@@ -25,7 +25,7 @@ if( isset($_GET["_address"]) && isset($_GET["_isDefault"]) && isset($_GET["id"])
                 echo json_encode($response);
 
             }else{
-                $status = "failed";
+                $status = "FAILED";
                 $result = 0;
                 $response["status"] = $status;
                 $response["result"] = $result;
@@ -35,7 +35,7 @@ if( isset($_GET["_address"]) && isset($_GET["_isDefault"]) && isset($_GET["id"])
             }
     
         }else{
-            $status = "failed";
+            $status = "FAILED";
             echo json_encode(array('status' => $status), JSON_FORCE_OBJECT);
         }
 }else{
