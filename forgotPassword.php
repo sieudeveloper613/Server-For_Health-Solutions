@@ -4,17 +4,12 @@ require "connect.php";
 
 $response = array();
 
-if(isset($_GET["idAddress"]) && isset($_GET["idCustomer"])){
-    $id = $_GET["idCustomer"];
-    $idAddress = $_GET["idAddress"];
-   
-            $query = "DELETE FROM address WHERE 
-            idCustomer = (SELECT idCustomer FROM Customer WHERE idCustomer = $id) AND 
-            idAddress = $idAddress";
-
-            // $sql = "DELETE FROM address WHERE address._idAddress = $idAddress";
-             
-            $result = mysqli_query($conn, $query);
+if(isset($_GET["passwordCustomer"]) ){
+    $password = $_GET["passwordCustomer"];
+    
+        if($conn){
+            $sql = "UPDATE customer SET passwordCustomer = '$password' where idCustomer = '$email' ";
+            $result = mysqli_query($conn, $sql);
 
             if($result){
                 $status = "SUCCESS";
@@ -29,12 +24,16 @@ if(isset($_GET["idAddress"]) && isset($_GET["idCustomer"])){
                 $response["status"] = $status;
                 $response["result"] = $result;
                 echo json_encode($response);
+                //echo json_encode(array('email' => $email, 'status' => $status, 'result' => $result));
+    
             }
     
-        
-
+        }else{
+            $status = "FAILED";
+            echo json_encode(array('status' => $status), JSON_FORCE_OBJECT);
+        }
 }else{
-    echo "none";
+    echo "????";
 }
 
     mysqli_close($conn);

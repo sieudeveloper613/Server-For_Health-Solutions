@@ -4,15 +4,11 @@ require "connect.php";
 
 $response = array();
 
-if(isset($_GET["idAddress"]) && isset($_GET["idCustomer"])){
-    $id = $_GET["idCustomer"];
-    $idAddress = $_GET["idAddress"];
+if(isset($_GET["idQuote"])){
+    $idQuote = $_GET["idQuote"];
+    
    
-            $query = "DELETE FROM address WHERE 
-            idCustomer = (SELECT idCustomer FROM Customer WHERE idCustomer = $id) AND 
-            idAddress = $idAddress";
-
-            // $sql = "DELETE FROM address WHERE address._idAddress = $idAddress";
+            $query = "DELETE FROM Quotes WHERE idQuote = $idQuote";
              
             $result = mysqli_query($conn, $query);
 
