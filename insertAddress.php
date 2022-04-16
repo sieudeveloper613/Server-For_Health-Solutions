@@ -4,14 +4,15 @@ require "connect.php";
 
 $response = array();
 
-if( isset($_GET["_contentAddress"]) && isset($_GET["_isDefault"]) && isset($_GET["_id"])){
-    $contentAddress = $_GET["_contentAddress"];
-    $isDefault = $_GET["_isDefault"];
-    $id = $_GET["_id"];
+if( isset($_GET["contentAddress"]) && isset($_GET["isDefault"]) && isset($_GET["idCustomer"])){
+    $contentAddress = $_GET["contentAddress"];
+    $isDefault = $_GET["isDefault"];
+    $id = $_GET["idCustomer"];
     
         if($conn){
-            $sql = "INSERT INTO address (_id, _contentAddress, _isDefault) 
-                VALUES ((SELECT _id FROM Customer WHERE _id = $id),'$contentAddress', $isDefault)";
+            $sql = "INSERT INTO address (idCustomer, contentAddress, isDefault) 
+                        VALUES ((SELECT idCustomer FROM Customer WHERE idCustomer = $id),
+                            '$contentAddress', $isDefault)";
              
             $result = mysqli_query($conn, $sql);
 

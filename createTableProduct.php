@@ -4,17 +4,17 @@ require "connect.php";
 
 if($conn){
     $createTableProduct = "CREATE TABLE Product (
-        _idProduct INT AUTO_INCREMENT,
-        _idCategory INT,
-        _nameProduct VARCHAR(255) NOT NULL,
-        _priceProduct DOUBLE(10,3) NOT NULL,
-        _nameCategory VARCHAR(255) NOT NULL,
-        _typeProduct VARCHAR(255) NOT NULL,
-        _originProduct VARCHAR(255) NOT NULL,
-        _branchProduct VARCHAR(255) NOT NULL,
-        _imageProduct VARCHAR(255) NOT NULL,
-        PRIMARY KEY (_idProduct),
-        FOREIGN KEY (_idCategory) REFERENCES Category(_idCategory)
+        idProduct INT AUTO_INCREMENT,
+        idCategory INT,
+        nameProduct VARCHAR(255) NOT NULL,
+        priceProduct DOUBLE(10,3) NOT NULL,
+        nameCategory VARCHAR(255) NOT NULL,
+        typeProduct VARCHAR(255) NOT NULL,
+        originProduct VARCHAR(255) NOT NULL,
+        branchProduct VARCHAR(255) NOT NULL,
+        imageProduct VARCHAR(255) NOT NULL,
+        PRIMARY KEY (idProduct),
+        FOREIGN KEY (idCategory) REFERENCES Category(idCategory)
     )";
     $result = mysqli_query($conn, $createTableProduct);
     if($result){

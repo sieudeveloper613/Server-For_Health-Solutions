@@ -4,12 +4,13 @@ require "connect.php";
 
 $response = array();
 
-if(isset($_GET["_idAddress"]) && isset($_GET["_id"])){
-    $id = $_GET["_id"];
-    $idAddress = $_GET["_idAddress"];
+if(isset($_GET["idAddress"]) && isset($_GET["idCustomer"])){
+    $id = $_GET["idCustomer"];
+    $idAddress = $_GET["idAddress"];
    
-            $query = "DELETE FROM address WHERE _id = (SELECT _id FROM Customer WHERE _id = $id) AND 
-                                                address._idAddress = $idAddress";
+            $query = "DELETE FROM address WHERE 
+            idAddress = (SELECT idAddress FROM Customer WHERE idAddress = $id) AND 
+            address.idAddress = $idAddress";
 
             // $sql = "DELETE FROM address WHERE address._idAddress = $idAddress";
              

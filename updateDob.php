@@ -4,12 +4,12 @@ require "connect.php";
 
 $response = array();
 
-if(isset($_GET["_dob"]) && isset($_GET["_id"])){
-    $dob = $_GET["_dob"];
-    $id = $_GET["_id"];
+if(isset($_GET["dobCustomer"]) && isset($_GET["idCustomer"])){
+    $dob = $_GET["dobCustomer"];
+    $id = $_GET["idCustomer"];
     
         if($conn){
-            $sql = "UPDATE customer SET _dob = '$dob' where _id = $id";
+            $sql = "UPDATE customer SET dobCustomer = '$dob' where idCustomer = $id";
             $result = mysqli_query($conn, $sql);
 
             if($result){

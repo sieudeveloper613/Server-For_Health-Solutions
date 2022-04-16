@@ -14,15 +14,15 @@
             // output data of each row
         while($row = mysqli_fetch_assoc($result)) {
             $product = array();
-            $product['_idProduct'] = $row['_idProduct'];
-            $product['_idCategory'] = $row['_idCategory'];
-            $product['_nameProduct'] = $row['_nameProduct'];
-            $product['_priceProduct'] = $row['_priceProduct'];
-            $product['_nameCategory'] = $row['_nameCategory'];
-            $product['_typeProduct'] = $row['_typeProduct'];
-            $product['_originProduct'] = $row['_originProduct'];
-            $product['_branchProduct'] = $row['_branchProduct'];
-            $product['_imageProduct'] = $row['_imageProduct'];
+            $product['idProduct'] = $row['idProduct'];
+            $product['idCategory'] = $row['idCategory'];
+            $product['nameProduct'] = $row['nameProduct'];
+            $product['priceProduct'] = $row['priceProduct'];
+            $product['nameCategory'] = $row['nameCategory'];
+            $product['typeProduct'] = $row['typeProduct'];
+            $product['originProduct'] = $row['originProduct'];
+            $product['branchProduct'] = $row['branchProduct'];
+            $product['imageProduct'] = $row['imageProduct'];
             
             //$response["product"] = $product;
             array_push($response['productList'], $product);

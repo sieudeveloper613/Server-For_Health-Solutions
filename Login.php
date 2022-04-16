@@ -3,13 +3,13 @@
 require "connect.php";
 
 $response = array();
-if(isset($_GET["_account"]) && isset($_GET["_password"])){
-    $account = $_GET["_account"];
-    $password = $_GET["_password"];
+if(isset($_GET["accountCustomer"]) && isset($_GET["passwordCustomer"])){
+    $account = $_GET["accountCustomer"];
+    $password = $_GET["passwordCustomer"];
     
     
         if($conn){
-            $sql = "select * from customer where _account = '$account' and _password = '$password' ";
+            $sql = "SELECT * FROM customer WHERE accountCustomer = '$account' AND passwordCustomer = '$password' ";
             $result = mysqli_query($conn, $sql);
     
             if(mysqli_num_rows($result) > 0){
@@ -19,15 +19,16 @@ if(isset($_GET["_account"]) && isset($_GET["_password"])){
                 $result = 1;
 
                 $customer = array();
-                $customer["_id"] = $row["_id"];
-                $customer["_name"] = $row["_name"];
-                $customer["_account"] = $row["_account"];
-                $customer["_password"] = $row["_password"];
-                $customer["_phone"] = $row["_phone"];
-                $customer["_dob"] = $row["_dob"];
-                $customer["_email"] = $row["_email"];
-                $customer["_gender"] = $row["_gender"];
-                $customer["_avatar"] = $row["_avatar"];
+                $customer["idCustomer"] = $row["idCustomer"];
+                $customer["nameCustomer"] = $row["nameCustomer"];
+                $customer["accountCustomer"] = $row["accountCustomer"];
+                $customer["passwordCustomer"] = $row["passwordCustomer"];
+                $customer["phoneCustomer"] = $row["phoneCustomer"];
+                $customer["dobCustomer"] = $row["dobCustomer"];
+                $customer["emailCustomer"] = $row["emailCustomer"];
+                $customer["genderCustomer"] = $row["genderCustomer"];
+                $customer["avatarCustomer"] = $row["avatarCustomer"];
+                $customer["idAddress"] = $row["idAddress"];
             
                 
 

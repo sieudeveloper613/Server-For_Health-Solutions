@@ -2,14 +2,15 @@
 
 require "connect.php";
 
-if(isset($_GET["_name"]) && isset($_GET["_account"]) && isset($_GET["_phone"]) && isset($_GET["_password"])){
-    $name = $_GET["_name"];
-    $account = $_GET["_account"];
-    $phone = $_GET["_phone"];
-    $password = $_GET["_password"];
+if(isset($_GET["nameCustomer"]) && isset($_GET["accountCustomer"]) 
+        && isset($_GET["phoneCustomer"]) && isset($_GET["passwordCustomer"])){
+    $name = $_GET["nameCustomer"];
+    $account = $_GET["accountCustomer"];
+    $phone = $_GET["phoneCustomer"];
+    $password = $_GET["passwordCustomer"];
     
         if($conn){
-            $sql = "SELECT * FROM customer WHERE _account = '$account' ";
+            $sql = "SELECT * FROM customer WHERE accountCustomer = '$account' ";
             $result = mysqli_query($conn, $sql);
     
             if(mysqli_num_rows($result) > 0){
@@ -18,8 +19,8 @@ if(isset($_GET["_name"]) && isset($_GET["_account"]) && isset($_GET["_phone"]) &
                 echo json_encode(array('status' => $status, 'result' => $result));
     
             }else{
-                $sql = "INSERT INTO customer (_name, _account, _password, _phone) 
-                                    values ('$name', '$account', '$password', '$phone')";
+                $sql = "INSERT INTO customer (nameCustomer, accountCustomer, passwordCustomer, phoneCustomer) 
+                                    VALUES ('$name', '$account', '$password', '$phone')";
                     if(mysqli_query($conn, $sql)){
                         $status = "SUCCESS";
                         $result = 1;

@@ -4,12 +4,12 @@ require "connect.php";
 
 if($conn){
     $createTableAddress = "CREATE TABLE address (
-        _idAddress INT AUTO_INCREMENT,
-        _contentAddress VARCHAR(255) NOT NULL,
-        _isDefault BOOLEAN DEFAULT 0,
-        _id INT,
-        PRIMARY KEY (_idAddress),
-        FOREIGN KEY (_id) REFERENCES Customer(_id)
+        idAddress INT AUTO_INCREMENT,
+        contentAddress VARCHAR(255) NOT NULL,
+        isDefault BOOLEAN DEFAULT 0,
+        idCustomer INT,
+        PRIMARY KEY (idAddress),
+        FOREIGN KEY (idCustomer) REFERENCES Customer(idCustomer)
     )";
     $result = mysqli_query($conn, $createTableAddress);
     if($result){

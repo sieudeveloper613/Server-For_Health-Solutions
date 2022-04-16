@@ -4,12 +4,12 @@ require "connect.php";
 
 $response = array();
 
-if(isset($_GET["_id"])){
+if(isset($_GET["idCustomer"])){
 
-    $id = $_GET["_id"];
+    $id = $_GET["idCustomer"];
 
     if($conn){
-        $sql = "SELECT * FROM Customer where _id = $id";
+        $sql = "SELECT * FROM Customer WHERE idCustomer = $id";
         $result = mysqli_query($conn, $sql);
         
         if(mysqli_num_rows($result) > 0){
@@ -19,16 +19,17 @@ if(isset($_GET["_id"])){
             $result = 1;
 
             $customer = array();
-                $customer["_id"] = $row["_id"];
-                $customer["_name"] = $row["_name"];
-                $customer["_account"] = $row["_account"];
-                $customer["_password"] = $row["_password"];
-                $customer["_phone"] = $row["_phone"];
-                $customer["_dob"] = $row["_dob"];
-                $customer["_email"] = $row["_email"];
-                $customer["_gender"] = $row["_gender"];
-                $customer["_idAddress"] = $row["_idAddress"];
-                $customer["_avatar"] = $row["_avatar"];
+            $customer["idCustomer"] = $row["idCustomer"];
+            $customer["nameCustomer"] = $row["nameCustomer"];
+            $customer["accountCustomer"] = $row["accountCustomer"];
+            $customer["passwordCustomer"] = $row["passwordCustomer"];
+            $customer["phoneCustomer"] = $row["phoneCustomer"];
+            $customer["dobCustomer"] = $row["dobCustomer"];
+            $customer["emailCustomer"] = $row["emailCustomer"];
+            $customer["genderCustomer"] = $row["genderCustomer"];
+            $customer["avatarCustomer"] = $row["avatarCustomer"];
+            $customer["idAddress"] = $row["idAddress"];
+        
 
             $response["customer"] = $customer;
             $response["status"] = $status;

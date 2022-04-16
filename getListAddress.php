@@ -4,9 +4,10 @@
 
     $response = array();
 
-    if($conn && isset($_GET['_id'])){
-        $id = $_GET["_id"];
-        $sql = "SELECT * FROM address WHERE _id = (SELECT _id FROM Customer WHERE _id = $id)";
+    if($conn && isset($_GET['idCustomer'])){
+        $id = $_GET["idCustomer"];
+
+        $sql = "SELECT * FROM address WHERE idCustomer = (SELECT idCustomer FROM Customer WHERE idCustomer = $id)";
         $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
@@ -15,10 +16,10 @@
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
                 $addressList = array();
-                $addressList['_id'] = $row['_id'];
-                $addressList['_idAddress'] = $row['_idAddress'];
-                $addressList['_contentAddress'] = $row['_contentAddress'];
-                $addressList['_isDefault'] = $row['_isDefault'];
+                $addressList['idCustomer'] = $row['idCustomer'];
+                $addressList['idAddress'] = $row['idAddress'];
+                $addressList['contentAddress'] = $row['contentAddress'];
+                $addressList['isDefault'] = $row['isDefault'];
             
             array_push($response['addressList'], $addressList);
         }

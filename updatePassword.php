@@ -4,12 +4,12 @@ require "connect.php";
 
 $response = array();
 
-if(isset($_GET["_password"]) && isset($_GET["_id"])){
-    $password = $_GET["_password"];
-    $id = $_GET["_id"];
+if(isset($_GET["passwordCustomer"]) && isset($_GET["idCustomer"])){
+    $password = $_GET["passwordCustomer"];
+    $id = $_GET["idCustomer"];
     
         if($conn){
-            $sql = "UPDATE customer SET _password = '$password' where _id = $id";
+            $sql = "UPDATE customer SET passwordCustomer = '$password' where idCustomer = $id";
             $result = mysqli_query($conn, $sql);
 
             if($result){

@@ -4,25 +4,25 @@
 
     $response = array();
 
-    if(isset($_GET['_idCategory']) && isset($_GET["_nameProduct"]) && isset($_GET["_priceProduct"])
-        && isset($_GET["_nameCategory"]) 
-        && isset($_GET["_typeProduct"]) && isset($_GET["_originProduct"])
-        && isset($_GET["_branchProduct"])&& isset($_GET["_imageProduct"]))
+    if(isset($_GET['idCategory']) && isset($_GET["nameProduct"]) && isset($_GET["priceProduct"])
+        && isset($_GET["nameCategory"]) 
+        && isset($_GET["typeProduct"]) && isset($_GET["originProduct"])
+        && isset($_GET["branchProduct"])&& isset($_GET["imageProduct"]))
     {
         
-        $idCategory = $_GET["_idCategory"];
-        $nameProduct = $_GET["_nameProduct"];
-        $priceProduct = $_GET["_priceProduct"];
-        $nameCategory = $_GET["_nameCategory"];
-        $typeProduct = $_GET["_typeProduct"];
-        $originProduct = $_GET["_originProduct"];
-        $branchProduct = $_GET["_branchProduct"];
-        $imageProduct = $_GET["_imageProduct"];
+        $idCategory = $_GET["idCategory"];
+        $nameProduct = $_GET["nameProduct"];
+        $priceProduct = $_GET["priceProduct"];
+        $nameCategory = $_GET["nameCategory"];
+        $typeProduct = $_GET["typeProduct"];
+        $originProduct = $_GET["originProduct"];
+        $branchProduct = $_GET["branchProduct"];
+        $imageProduct = $_GET["imageProduct"];
     
-        $sql = "INSERT INTO Product (_idCategory, _nameProduct, _priceProduct, _typeProduct, 
-                                     _originProduct, _branchProduct, _imageProduct) 
-                    VALUES ((SELECT _idCategory FROM Category WHERE _idCategory = $idCategory),
-                            '$nameProduct', $priceProduct,(SELECT _nameCategory FROM Category WHERE _idCategory = $idCategory),
+        $sql = "INSERT INTO Product (idCategory, nameProduct, priceProduct, typeProduct, 
+                                     originProduct, branchProduct, imageProduct) 
+                    VALUES ((SELECT idCategory FROM Category WHERE idCategory = $idCategory),
+                            '$nameProduct', $priceProduct,(SELECT nameCategory FROM Category WHERE idCategory = $idCategory),
                             '$typeProduct', '$originProduct',
                             '$branchProduct', '$imageProduct')"; 
 
