@@ -4,18 +4,12 @@ require "connect.php";
 
 $response = array();
 
-if(isset($_GET["nameReceiver"]) && isset($_GET["phoneReceiver"]) && isset($_GET["contentAddress"]) 
-            && isset($_GET["isDefault"]) && isset($_GET["idCustomer"])){
-    $contentAddress = $_GET["contentAddress"];
-    $name = $_GET["nameReceiver"];
-    $phone = $_GET["phoneReceiver"];
-    $isDefault = $_GET["isDefault"];
+if( isset($_GET["mainAddress"]) && isset($_GET["idCustomer"])){
+    $address = $_GET["mainAddress"];
     $id = $_GET["idCustomer"];
     
         if($conn){
-            $sql = "INSERT INTO address (idCustomer, nameReceiver, phoneReceiver, contentAddress, isDefault) 
-                        VALUES ((SELECT idCustomer FROM Customer WHERE idCustomer = $id),
-                            '$name', '$phone', '$contentAddress', $isDefault)";
+            $sql = "UPDATE customer SET mainAddress = '$address' where idCustomer = $id"; 
              
             $result = mysqli_query($conn, $sql);
 

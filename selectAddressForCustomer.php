@@ -4,23 +4,18 @@ require "connect.php";
 
 $response = array();
 
-if( isset($_GET["contentAddress"]) && isset($_GET["isDefault"]) && isset($_GET["idCustomer"]) && isset($_GET["idAddress"])){
-    $address = $_GET["contentAddress"];
-    $isDefault = $_GET["isDefault"];
-    $idAddress = $_GET["idAddress"];
-    $id = $_GET["idCustomer"];
+if( isset($_GET["idAddress"])){
+    $id = $_GET["idAddress"];
+    
     
         if($conn){
-            $sql = "UPDATE address SET contentAddress = '$address', isDefault = $isDefault 
-                where idCustomer = (SELECT idCustomer FROM Customer WHERE idCustomer = $id) 
-                    AND idAddress = $idAddress"; 
+            $sql = "UPDATE customer SET idAddress = (SELECT idAddress FROM address WHERE idAddress = $id)"; 
              
             $result = mysqli_query($conn, $sql);
 
             if($result){
                 $status = "SUCCESS";
                 $result = 1;
-                $response["idCustomer"] = $id;
                 $response["status"] = $status;
                 $response["result"] = $result;
                 echo json_encode($response);

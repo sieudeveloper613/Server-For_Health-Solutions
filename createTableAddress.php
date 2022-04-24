@@ -5,6 +5,8 @@ require "connect.php";
 if($conn){
     $createTableAddress = "CREATE TABLE address (
         idAddress INT AUTO_INCREMENT,
+        nameReceiver VARCHAR(255) NOT NULL,
+        phoneReceiver VARCHAR(10) NOT NULL,
         contentAddress VARCHAR(255) NOT NULL,
         isDefault BOOLEAN DEFAULT 0,
         idCustomer INT,

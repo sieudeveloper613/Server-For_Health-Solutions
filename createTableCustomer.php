@@ -13,7 +13,7 @@ if($conn){
         emailCustomer VARCHAR(255) NOT NULL,
         genderCustomer TINYINT(10) NOT NULL,
         avatarCustomer VARCHAR(255) NOT NULL,
-        idAddress INT,
+        mainAddress VARCHAR(255) NOT NULL,
         PRIMARY KEY (idCustomer)
     )";
     $result = mysqli_query($conn, $createTableCustomer);

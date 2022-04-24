@@ -2,31 +2,36 @@
 
     require_once 'connect.php';
     $response = array();
-    if(isset($_GET["idProduct"])){
-        $idProduct = $_GET["idProduct"];
+    if(isset($_GET["idCategory"])){
+        $id = $_GET["idCategory"];
 
         if($conn){
-            $sql = "SELECT * FROM product where idProduct = $idProduct";
+            $sql = "SELECT * FROM product where idCategory = (SELECT idCategory FROM Category WHERE idCategory = $id)";
             $result = mysqli_query($conn, $sql);
             
             if (mysqli_num_rows($result) > 0) {
+
+                $response["productList"] = array();
+
                 $row = mysqli_fetch_assoc($result);
+                while($row = mysqli_fetch_assoc($result)) {
                     $product = array();
+                    $product['idCategory'] = $row['idCategory'];
                     $product['idProduct'] = $row['idProduct'];
-            $product['idCategory'] = $row['idCategory'];
-            $product['idType'] = $row['idType'];
-            $product['nameProduct'] = $row['nameProduct'];
-            $product['priceProduct'] = $row['priceProduct'];
-            $product['nameCategory'] = $row['nameCategory'];
-            $product['nameType'] = $row['nameType'];
-            $product['originProduct'] = $row['originProduct'];
-            $product['branchProduct'] = $row['branchProduct'];
-            $product['imageProduct'] = $row['imageProduct'];
-            $product['contentProduct'] = $row['contentProduct'];
+                    $product['nameProduct'] = $row['nameProduct'];
+                    $product['priceProduct'] = $row['priceProduct'];
+                    $product['nameCategory'] = $row['nameCategory'];
+                    $product['typeProduct'] = $row['typeProduct'];
+                    $product['originProduct'] = $row['originProduct'];
+                    $product['branchProduct'] = $row['branchProduct'];
+                    $product['imageProduct'] = $row['imageProduct'];
+                    
+                    //$response["product"] = $product;
+                    array_push($response['productList'], $product);
+                }
                 
                     $status = "SUCCESS";
                     $result = 1;
-                    $response["product"] = $product;
                     $response["status"] = $status;
                     $response["result"] = $result;
     

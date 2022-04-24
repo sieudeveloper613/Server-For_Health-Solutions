@@ -5,7 +5,7 @@
     $response = array();
 
     if($conn){
-        $sql = "SELECT * FROM product";
+        $sql = "SELECT * FROM product ORDER BY idProduct ASC";
         $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
@@ -16,13 +16,15 @@
             $product = array();
             $product['idProduct'] = $row['idProduct'];
             $product['idCategory'] = $row['idCategory'];
+            $product['idType'] = $row['idType'];
             $product['nameProduct'] = $row['nameProduct'];
             $product['priceProduct'] = $row['priceProduct'];
             $product['nameCategory'] = $row['nameCategory'];
-            $product['typeProduct'] = $row['typeProduct'];
+            $product['nameType'] = $row['nameType'];
             $product['originProduct'] = $row['originProduct'];
             $product['branchProduct'] = $row['branchProduct'];
             $product['imageProduct'] = $row['imageProduct'];
+            $product['contentProduct'] = $row['contentProduct'];
             
             //$response["product"] = $product;
             array_push($response['productList'], $product);

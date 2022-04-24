@@ -6,15 +6,18 @@ if($conn){
     $createTableProduct = "CREATE TABLE Product (
         idProduct INT AUTO_INCREMENT,
         idCategory INT,
+        idType INT,
         nameProduct VARCHAR(255) NOT NULL,
         priceProduct DOUBLE(10,3) NOT NULL,
         nameCategory VARCHAR(255) NOT NULL,
-        typeProduct VARCHAR(255) NOT NULL,
+        nameType VARCHAR(255) NOT NULL,
         originProduct VARCHAR(255) NOT NULL,
         branchProduct VARCHAR(255) NOT NULL,
         imageProduct VARCHAR(255) NOT NULL,
+        contentProduct VARCHAR(255) NOT NULL,
         PRIMARY KEY (idProduct),
-        FOREIGN KEY (idCategory) REFERENCES Category(idCategory)
+        FOREIGN KEY (idCategory) REFERENCES Category(idCategory),
+        FOREIGN KEY (idType) REFERENCES Types(idType)
     )";
     $result = mysqli_query($conn, $createTableProduct);
     if($result){

@@ -4,26 +4,24 @@
 
     $response = array();
 
-    if($conn && isset($_GET['idCustomer'])){
-        $id = $_GET["idCustomer"];
+    if($conn){
 
-        $sql = "SELECT * FROM address WHERE idCustomer = (SELECT idCustomer FROM Customer WHERE idCustomer = $id)";
+        $sql = "SELECT * FROM Feedback";
         $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
        
-            $response["addressList"] = array();
+            $response["feedbackList"] = array();
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
-                $addressList = array();
-                $addressList['idCustomer'] = $row['idCustomer'];
-                $addressList['idAddress'] = $row['idAddress'];
-                $addressList['nameReceiver'] = $row['nameReceiver'];
-                $addressList['phoneReceiver'] = $row['phoneReceiver'];
-                $addressList['contentAddress'] = $row['contentAddress'];
-                $addressList['isDefault'] = $row['isDefault'];
+                $feedbackList = array();
+                $feedbackList['idFeedback'] = $row['idFeedback'];
+                $feedbackList['idCustomer'] = $row['idCustomer'];
+                $feedbackList['nameCustomer'] = $row['nameCustomer'];
+                $feedbackList['titleFeedback'] = $row['titleFeedback'];
+                $feedbackList['contentFeedback'] = $row['contentFeedback'];
             
-            array_push($response['addressList'], $addressList);
+            array_push($response['feedbackList'], $feedbackList);
         }
         $status = "SUCCESS";
         $result = 1;
