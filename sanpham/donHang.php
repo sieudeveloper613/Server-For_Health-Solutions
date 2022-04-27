@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <?php
-    $sql = "SELECT * FROM types inner join category on types.idCategory = category.idCategory WHERE types.idCategory = 2" ;
+    $sql = "SELECT * FROM bill" ;
     $query = mysqli_query($conn, $sql);
 
 ?>
@@ -9,7 +9,7 @@
 <div class="container-fluid">
     <div class="card" style = "color: #0088FF">
         <div class="card-header" style = "text-align: center">
-            <h2>Loại Sức Khỏe & Làm Đẹp</h2>
+            <h2>Duyệt Đơn Hàng</h2>
          </div>
          <div class="navbar">
          <div class="icon-bar">
@@ -27,31 +27,41 @@
           </div>
         </div>
         <a href="index.php?page_layout=quanLyUser">Khách Hàng</a>
-        <a href="index.php?page_layout=danhMuc">Danh Mục</a>
+        <a class="active" href="index.php?page_layout=danhMuc">Danh Mục</a>
         <div class="dropdown">
           <button class="dropbtn" >Loại
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
             <a href="index.php?page_layout=loaiGiaDung">Gia Dụng & Đời Sống</a>
-            <a class= "active" href="index.php?page_layout=loaiSucKhoe">Sức Khỏe & Làm Đẹp</a>
+            <a href="index.php?page_layout=loaiSucKhoe">Sức Khỏe & Làm Đẹp</a>
             <a href="index.php?page_layout=loaiMeVaBe">Mẹ & Bé </a>
             <a href="index.php?page_layout=loaiBachHoa">Bách Hóa Tổng Hợp </a>
           </div>
         </div>
+       
         <a href="index.php?page_layout=feedBack">FeedBack Khách Hàng</a>
         <a href="index.php?page_layout=notications">Trả Lời Khách Hàng</a>
         <a href="index.php?page_layout=donHang">Đơn Hàng</a>
         
       </div>
           </div>
+                    
+        </div>
          <div class="card-body">
          <table class="table table-striped">
             <thead>
                 <tr style = "color: #0088FF">
                     <th>#</th>
-                    <th>Tên loại </th>
-                    <th>Danh mục </th>
+                    <th>Id khách hàng </th>
+                    <th>Tên khách hàng </th>
+                    <th>Số điện thoại </th>
+                    <th>Địa chỉ </th>
+                    <th>Mã giỏ hàng </th>
+                    <th>Tên sản phẩm </th>
+                    <th>Giá sản phẩm </th>
+                    <th>Số lượng </th>
+                    <th>Hình ảnh </th>
                 </tr>
             </thead> 
             <tbody>
@@ -60,20 +70,27 @@
                 while($row = mysqli_fetch_assoc($query)){?>
                     <tr>
                         <td><?php echo $i++; ?></td>
-                        <td><?php echo $row['nameType']; ?></td>
-                        <td><?php echo $row['idCategory']; ?></td>
+                        <td><?php echo $row['idCustomer']; ?></td>
+                        <td><?php echo $row['nameReceiver']; ?></td>
+                        <td><?php echo $row['phoneReceiver']; ?></td>
+                        <td><?php echo $row['deliveryAddress']; ?></td>
+                        <td><?php echo $row['idCart']; ?></td>
+                        <td><?php echo $row['nameProduct']; ?></td>
+                        <td><?php echo $row['priceProduct']; ?></td>
+                        <td><?php echo $row['amountCart']; ?></td>
+                        <td><?php echo $row['imageProduct']; ?></td>
                         <td>
-                        <a href="index.php?page_layout=suaLoai&id=<?php echo $row['idType']; ?>"><i class="fas fa-wrench"></i></a>
+                        <a style = "color: green"><i class="fa fa-check"></i></a>
                         </td>
                         <td>
-                            <a onclick="return Del('<?php echo $row['nameType'];?>')"  style = "color: red"  href="index.php?page_layout=xoaLoai&id=<?php echo $row['idType']; ?>"><i class="fa fa-trash"></i></a>
+                        <a style = "color: red"><i class="fa fa-remove"></i></a>
                         </td>
                         
                 </tr>
                 <?php } ?>
             </tbody>
          </table>
-         <a class="btn btn-primary" href="index.php?page_layout=themLoai">Thêm mới</a>
+        
 
          </div>
     </div>
@@ -81,7 +98,7 @@
 
 <script>
    function Del(name){
-        return confirm("Bạn có chắc chắn muốn xóa danh loại: " + name + "?");
+        return confirm("Bạn có chắc chắn muốn xóa danh mục: " + name + "?");
    }
 </script>
 
@@ -126,7 +143,7 @@ body {
   font-family: inherit; /* Important for vertical align on mobile phones */
   margin: 0; /* Important for vertical align on mobile phones */
 }
-/* Add a red background color to navbar links on hover */
+/* Add a blue background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
   background-color: #0088FF;
 }
@@ -160,6 +177,7 @@ body {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
 
 .icon-bar {
   width: 50px; /* Set a specific width */

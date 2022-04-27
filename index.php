@@ -102,6 +102,10 @@
             case 'traLoi':
                 require_once 'sanpham/traLoi.php';
                 break;
+            case 'donHang':
+                require_once 'sanpham/donHang.php';
+                break;
+    
 
             
             case 'themDanhMuc':
