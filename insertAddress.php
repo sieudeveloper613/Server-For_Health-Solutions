@@ -4,24 +4,22 @@ require "connect.php";
 
 $response = array();
 
-if(isset($_GET["nameReceiver"]) && isset($_GET["phoneReceiver"]) && isset($_GET["contentAddress"]) 
-            && isset($_GET["isDefault"]) && isset($_GET["idCustomer"])){
+if( isset($_GET["contentAddress"]) && isset($_GET["isDefault"]) && isset($_GET["idCustomer"])){
     $contentAddress = $_GET["contentAddress"];
-    $name = $_GET["nameReceiver"];
-    $phone = $_GET["phoneReceiver"];
     $isDefault = $_GET["isDefault"];
     $id = $_GET["idCustomer"];
     
         if($conn){
-            $sql = "INSERT INTO address (idCustomer, nameReceiver, phoneReceiver, contentAddress, isDefault) 
+            $sql = "INSERT INTO address (idCustomer, contentAddress, isDefault) 
                         VALUES ((SELECT idCustomer FROM Customer WHERE idCustomer = $id),
-                            '$name', '$phone', '$contentAddress', $isDefault)";
+                            '$contentAddress', $isDefault)";
              
             $result = mysqli_query($conn, $sql);
 
             if($result){
                 $status = "SUCCESS";
                 $result = 1;
+                $response["idCustomer"] = $id;
                 $response["status"] = $status;
                 $response["result"] = $result;
                 echo json_encode($response);

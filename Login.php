@@ -28,7 +28,7 @@ if(isset($_GET["accountCustomer"]) && isset($_GET["passwordCustomer"])){
                 $customer["emailCustomer"] = $row["emailCustomer"];
                 $customer["genderCustomer"] = $row["genderCustomer"];
                 $customer["avatarCustomer"] = $row["avatarCustomer"];
-                $customer["mainAddress"] = $row["mainAddress"];
+                $customer["idAddress"] = $row["idAddress"];
             
                 
 

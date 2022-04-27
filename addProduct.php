@@ -6,29 +6,25 @@
 
     if(isset($_GET['idCategory']) && isset($_GET["nameProduct"]) && isset($_GET["priceProduct"])
         && isset($_GET["nameCategory"]) 
-        && isset($_GET["nameType"]) && isset($_GET["originProduct"])
-        && isset($_GET["branchProduct"])&& isset($_GET["imageProduct"])
-        && isset($_GET["contentProduct"]))
+        && isset($_GET["typeProduct"]) && isset($_GET["originProduct"])
+        && isset($_GET["branchProduct"])&& isset($_GET["imageProduct"]))
     {
         
         $idCategory = $_GET["idCategory"];
-        $idType = $_GET["idType"];
         $nameProduct = $_GET["nameProduct"];
         $priceProduct = $_GET["priceProduct"];
         $nameCategory = $_GET["nameCategory"];
-        $typeProduct = $_GET["nameType"];
+        $typeProduct = $_GET["typeProduct"];
         $originProduct = $_GET["originProduct"];
         $branchProduct = $_GET["branchProduct"];
         $imageProduct = $_GET["imageProduct"];
-        $contentProduct = $_GET["contentProduct"];
-
-        $sql = "INSERT INTO Product (idCategory, idType, nameProduct, priceProduct, nameType, 
-                                     originProduct, branchProduct, imageProduct, contentProduct) 
+    
+        $sql = "INSERT INTO Product (idCategory, nameProduct, priceProduct, typeProduct, 
+                                     originProduct, branchProduct, imageProduct) 
                     VALUES ((SELECT idCategory FROM Category WHERE idCategory = $idCategory),
-                            (SELECT idType FROM Types WHERE idType = $idType),
-                            '$nameProduct', $priceProduct, (SELECT nameCategory FROM Category WHERE idCategory = $idCategory),
-                            (SELECT nameType FROM Types WHERE idType = $idType), '$originProduct',
-                            '$branchProduct', '$imageProduct', '$contentProduct')"; 
+                            '$nameProduct', $priceProduct,(SELECT nameCategory FROM Category WHERE idCategory = $idCategory),
+                            '$typeProduct', '$originProduct',
+                            '$branchProduct', '$imageProduct')"; 
 
         $result = mysqli_query($conn, $sql);
 

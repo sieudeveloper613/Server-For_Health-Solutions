@@ -9,8 +9,8 @@ if(isset($_GET["idAddress"]) && isset($_GET["idCustomer"])){
     $idAddress = $_GET["idAddress"];
    
             $query = "DELETE FROM address WHERE 
-            idCustomer = (SELECT idCustomer FROM Customer WHERE idCustomer = $id) AND 
-            idAddress = $idAddress";
+            idAddress = (SELECT idAddress FROM Customer WHERE idAddress = $id) AND 
+            address.idAddress = $idAddress";
 
             // $sql = "DELETE FROM address WHERE address._idAddress = $idAddress";
              

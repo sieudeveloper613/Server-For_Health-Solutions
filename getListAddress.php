@@ -18,8 +18,6 @@
                 $addressList = array();
                 $addressList['idCustomer'] = $row['idCustomer'];
                 $addressList['idAddress'] = $row['idAddress'];
-                $addressList['nameReceiver'] = $row['nameReceiver'];
-                $addressList['phoneReceiver'] = $row['phoneReceiver'];
                 $addressList['contentAddress'] = $row['contentAddress'];
                 $addressList['isDefault'] = $row['isDefault'];
             
