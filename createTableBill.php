@@ -3,21 +3,24 @@
 require "connect.php";
 
 if($conn){
-    $createTableCart = "CREATE TABLE Carts (
-        idCart INT AUTO_INCREMENT,
+    $createTableBill = "CREATE TABLE Bill (
+        idBill INT AUTO_INCREMENT,
         idCustomer INT,
-        idProduct INT,
+        nameReceiver VARCHAR(255) NOT NULL,
+        phoneReceiver VARCHAR(255) NOT NULL,
+        deliveryAddress VARCHAR(255) NOT NULL,  
+        idCart INT,
         nameProduct VARCHAR(255) NOT NULL,
         priceProduct DOUBLE NOT NULL,
         amountCart INT NOT NULL,
         imageProduct VARCHAR(255) NOT NULL,
-        PRIMARY KEY (idCart),
+        PRIMARY KEY (idbILL),
         FOREIGN KEY (idCustomer) REFERENCES Customer(idCustomer),
-        FOREIGN KEY (idProduct) REFERENCES Product(idProduct)
+        FOREIGN KEY (idCart) REFERENCES Carts(idCart)
     )";
-    $result = mysqli_query($conn, $createTableCart);
+    $result = mysqli_query($conn, $createTableBill);
     if($result){
-        echo "Create Table Cart Successful";
+        echo "Create Table Bill Successful";
     }else{
         echo "Error creating table: " . mysqli_error($conn);
     }

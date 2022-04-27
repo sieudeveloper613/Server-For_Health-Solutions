@@ -23,6 +23,7 @@
                     $cart['idProduct'] = $row['idProduct'];
                     $cart['nameProduct'] = $row['nameProduct'];
                     $cart['priceProduct'] = $row['priceProduct'];
+                    $cart['amountCart'] = $row['amountCart'];
                     $cart['imageProduct'] = $row['imageProduct'];
                 array_push($response['cartList'], $cart);
             }

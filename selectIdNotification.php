@@ -4,15 +4,13 @@
 
     $response = array();
 
-    if(isset($_GET["idCustomer"]) && isset($_GET["idFeedback"])){
+    if(isset($_GET["idCustomer"])){
 
         $id = $_GET["idCustomer"];
-        $idFeedback = $_GET["idFeedback"];
 
         if($conn){
             $sql = "SELECT * FROM Notifications WHERE 
-            idCustomer = (SELECT idCustomer FROM Customer WHERE idCustomer = $id) AND 
-            idFeedback = (SELECT idFeedback FROM Feedback WHERE idFeedback = $idFeedback)";
+            idCustomer = (SELECT idCustomer FROM Customer WHERE idCustomer = $id)";
 
             $result = mysqli_query($conn, $sql);
 

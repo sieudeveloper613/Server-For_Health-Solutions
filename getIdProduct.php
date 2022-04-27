@@ -1,18 +1,22 @@
 <?php
 
-    require_once 'connect.php';
+    require 'connect.php';
+
     $response = array();
+
     if(isset($_GET["idProduct"])){
-        $idProduct = $_GET["idProduct"];
+
+        $id = $_GET["idProduct"];
 
         if($conn){
-            $sql = "SELECT * FROM product where idProduct = $idProduct";
+            $sql = "SELECT * FROM product where idProduct = $id";
             $result = mysqli_query($conn, $sql);
             
             if (mysqli_num_rows($result) > 0) {
                 $row = mysqli_fetch_assoc($result);
-                    $product = array();
-                    $product['idProduct'] = $row['idProduct'];
+                
+            $product = array();
+            $product['idProduct'] = $row['idProduct'];
             $product['idCategory'] = $row['idCategory'];
             $product['idType'] = $row['idType'];
             $product['nameProduct'] = $row['nameProduct'];
@@ -24,13 +28,13 @@
             $product['imageProduct'] = $row['imageProduct'];
             $product['contentProduct'] = $row['contentProduct'];
                 
-                    $status = "SUCCESS";
-                    $result = 1;
-                    $response["product"] = $product;
-                    $response["status"] = $status;
-                    $response["result"] = $result;
+            $status = "SUCCESS";
+            $result = 1;
+            $response["product"] = $product;
+            $response["status"] = $status;
+            $response["result"] = $result;
     
-                    echo json_encode($response);
+            echo json_encode($response);
     
             } else {
                     $status = "FAILED";
